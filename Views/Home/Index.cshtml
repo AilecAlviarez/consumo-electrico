@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Consumo Electrico</h1>
+    <form class="form">
+        <div class="container">
+            <div class="row">
+                 <h3 class="h3 text-center" >Nombre del Cliente</h3>
+                   <input type="text" class="form-control" id="name" placeholder="nombre del cliente">
+
+            </div>
+
+        </div>
+        <div class="container">
+        <span class="my-4">datos mensuales de medicion del Consumo</span>
+                    <hr>
+        </div>
+        
+                    
+      
+        <div class="container-fluid">
+            <h4>tipo de Comercio</h4>
+           <div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Residencial
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label mr-2" for="flexRadioDefault2">
+    Comercio
+  </label>
+</div>
+
+        </div>
+       
+          <h3>Lectura Inicial</h3>
+        <input class="form-control form-control-lg" type="text" placeholder="consumo inicial" aria-label=".form-control-lg example">
+
+          <h3>Lectura Final</h3>
+          <input class="form-control form-control-lg" type="text" placeholder="consumo final" aria-label=".form-control-lg example">
+        <div class="container">
+          <h3>Consumo</h3>
+          <input class="form-control form-control-lg" type="text" placeholder="consumo en vatios" id="consumo" aria-label=".form-control-lg example">
+        </div>
+        <button class="btn btn-info my-5 ml-5 mr-5">salir</button>
+        <button type="submit" class="btn btn-info my-5 ml-5 mr-5" id="send_info">cancelar</button>
+        <div class="container my-2">
+          <div class="span" id="monto"></div>
+
+        </div>
+
+    </form>
+    <script>
+        const nombreCliente=document.getElementById("name")
+        const boton=document.getElementById("send_info")
+        const consumo=document.getElementById("consumo")
+        const comercio=document.getElementById("flexRadioDefault2")
+        const CONSUMO_RESIDENCIAL=0.3;
+        const CONSUMO_COMERCIAL=0.2;
+        boton.addEventListener("click",(e)=>{
+            e.preventDefault();
+            //si es false es residencial
+            let tipo_comercio=comercio.value=='on'?true:false;
+            let objeto={
+              name:nombreCliente.value,
+              consumo:consumo.value,
+              tipo_comercio
+              
+            }
+          
+            let tipo =objeto.tipo_comercio?CONSUMO_COMERCIAL:CONSUMO_RESIDENCIAL
+            let monto=objeto.consumo*tipo
+            const montoDiv=document.getElementById("monto")
+            montoDiv.innerHTML=monto
+            
+
+        })
+        
+        
+    </script>
+</div>
